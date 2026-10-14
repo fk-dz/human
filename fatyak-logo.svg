@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 140" width="520" height="140" fill="none">
+  <defs>
+    <linearGradient id="fatyakPrimary" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00F2FE" />
+      <stop offset="50%" stop-color="#06B6D4" />
+      <stop offset="100%" stop-color="#10B981" />
+    </linearGradient>
+    <linearGradient id="fatyakGold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FDE047" />
+      <stop offset="50%" stop-color="#F59E0B" />
+      <stop offset="100%" stop-color="#EA580C" />
+    </linearGradient>
+    <linearGradient id="fatyakBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0B1528" />
+      <stop offset="100%" stop-color="#050B16" />
+    </linearGradient>
+    <filter id="fatyakGlow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="4" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+
+  <!-- Outer Hexagonal Shield Container -->
+  <g transform="translate(10, 10)">
+    <polygon points="60,2 112,32 112,88 60,118 8,88 8,32" fill="url(#fatyakBg)" stroke="url(#fatyakPrimary)" stroke-width="3" filter="url(#fatyakGlow)" />
+    <polygon points="60,10 104,36 104,84 60,110 16,84 16,36" fill="none" stroke="#1E293B" stroke-width="1.5" stroke-dasharray="4 3" />
+
+    <!-- Stylized 3D Vitruvian / DNA Core Ring -->
+    <circle cx="60" cy="60" r="34" fill="none" stroke="url(#fatyakPrimary)" stroke-width="1.5" stroke-opacity="0.45" />
+    <ellipse cx="60" cy="60" rx="34" ry="15" transform="rotate(-30 60 60)" fill="none" stroke="url(#fatyakPrimary)" stroke-width="1.5" stroke-opacity="0.65" />
+    <ellipse cx="60" cy="60" rx="34" ry="15" transform="rotate(30 60 60)" fill="none" stroke="url(#fatyakGold)" stroke-width="1.5" stroke-opacity="0.65" />
+
+    <!-- Futuristic Monogram 'F' + Medical Pulse Spine -->
+    <path d="M42 34 H82 L76 44 H53 V56 H74 L69 65 H53 V88 L42 82 Z" fill="url(#fatyakPrimary)" filter="url(#fatyakGlow)" />
+    <!-- Glowing Anatomical Heart / Core Node -->
+    <circle cx="75" cy="76" r="6" fill="url(#fatyakGold)" filter="url(#fatyakGlow)" />
+    <path d="M62 76 H69 L72 69 L77 83 L80 76 H88" stroke="url(#fatyakGold)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" />
+
+    <!-- Corner Tech Nodes -->
+    <circle cx="60" cy="2" r="3" fill="#00F2FE" />
+    <circle cx="60" cy="118" r="3" fill="#10B981" />
+    <circle cx="112" cy="32" r="2.5" fill="#00F2FE" />
+    <circle cx="8" cy="88" r="2.5" fill="#10B981" />
+  </g>
+
+  <!-- Brand Typography: FATYAK -->
+  <g transform="translate(145, 0)">
+    <text x="0" y="74" font-family="'Segoe UI', 'Orbitron', 'Inter', system-ui, sans-serif" font-size="54" font-weight="900" letter-spacing="7" fill="#FFFFFF">
+      FAT<tspan fill="url(#fatyakPrimary)">YAK</tspan>
+    </text>
+    <!-- Decorative Medical Pulse Underline -->
+    <path d="M2 88 H115 L124 77 L133 98 L143 82 L150 88 H345" stroke="url(#fatyakPrimary)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
+    <circle cx="345" cy="88" r="4" fill="url(#fatyakGold)" />
+
+    <text x="4" y="114" font-family="'Segoe UI', 'Cairo', 'Tajawal', sans-serif" font-size="15" font-weight="700" letter-spacing="2.5" fill="#94A3B8">
+      3D HUMAN ANATOMY ENGINE • المطور: FATYAK
+    </text>
+  </g>
+</svg>

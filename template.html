@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FATYAK • أطلس جسم الإنسان ثلاثي الأبعاد | 3D Human Anatomy Engine</title>
+  <style>/*__INLINE_CSS__*/</style>
+</head>
+<body>
+  <div class="studio-shell">
+    <!-- الشريط العلوي الاحترافي بشعار وهوية المطور FATYAK -->
+    <header class="top-navbar">
+      <div class="brand-cluster" id="btn-fatyak-modal" title="انقر لعرض بطاقة المطور FATYAK">
+        <!-- شعار FATYAK الاحترافي المتجه -->
+        <svg class="fatyak-logo-svg" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="navFatyakCyan" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#00F2FE" />
+              <stop offset="50%" stop-color="#06B6D4" />
+              <stop offset="100%" stop-color="#10B981" />
+            </linearGradient>
+            <linearGradient id="navFatyakGold" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#FDE047" />
+              <stop offset="100%" stop-color="#EA580C" />
+            </linearGradient>
+          </defs>
+          <polygon points="60,4 112,34 112,86 60,116 8,86 8,34" fill="#071226" stroke="url(#navFatyakCyan)" stroke-width="4" />
+          <circle cx="60" cy="60" r="34" fill="none" stroke="url(#navFatyakCyan)" stroke-width="1.6" stroke-opacity="0.45" />
+          <ellipse cx="60" cy="60" rx="34" ry="14" transform="rotate(-30 60 60)" fill="none" stroke="url(#navFatyakCyan)" stroke-width="1.8" stroke-opacity="0.7" />
+          <ellipse cx="60" cy="60" rx="34" ry="14" transform="rotate(30 60 60)" fill="none" stroke="url(#navFatyakGold)" stroke-width="1.8" stroke-opacity="0.7" />
+          <path d="M42 34 H82 L76 44 H53 V56 H74 L69 65 H53 V88 L42 82 Z" fill="url(#navFatyakCyan)" />
+          <circle cx="75" cy="76" r="6.5" fill="url(#navFatyakGold)" />
+          <path d="M60 76 H68 L72 68 L77 84 L81 76 H90" stroke="url(#navFatyakGold)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+
+        <div class="brand-titles">
+          <div class="brand-main-row">
+            <span class="brand-name-en" dir="ltr">FATYAK</span>
+            <span class="dev-pill">المطور: FATYAK</span>
+          </div>
+          <span class="brand-sub-ar">أطلس جسم الإنسان ثلاثي الأبعاد • بدون API</span>
+        </div>
+      </div>
+
+      <!-- شريط تصفية الأجهزة الحيوية -->
+      <nav id="systems-filter-bar" class="systems-filter-bar" aria-label="أجهزة جسم الإنسان"></nav>
+
+      <!-- أزرار الأدوات السريعة -->
+      <div class="top-utility-actions">
+        <button type="button" id="btn-start-quiz" class="util-btn gold">
+          <span>🎯</span> اختبار تشريحي
+        </button>
+        <button type="button" id="btn-capture-screenshot" class="util-btn">
+          <span>📸</span> حفظ صورة HD
+        </button>
+      </div>
+    </header>
+
+    <!-- الشبكة الرئيسية للاستوديو -->
+    <main class="studio-main-grid">
+      <!-- اللوحة اليمنى: دليل الأعضاء باللغة العربية + أدوات التفكيك والشفافية -->
+      <aside class="side-panel">
+        <div class="panel-section-header">
+          <div class="panel-section-title">
+            <span>🧬</span> دليل الأعضاء الداخلية
+          </div>
+          <span id="organs-count-badge" class="count-badge">22 عضو</span>
+        </div>
+
+        <div class="search-box-wrap">
+          <input
+            type="search"
+            id="organ-search-input"
+            class="organ-search-input"
+            placeholder="🔍 ابحث عن أي عضو بالعربية (القلب، الكبد، المخ...)"
+          />
+        </div>
+
+        <div id="organs-directory-list" class="organs-directory-list"></div>
+
+        <!-- أدوات التشريح والتفكيك والشفافية -->
+        <div class="dissection-controls-box">
+          <div class="slider-row">
+            <div class="slider-label-line">
+              <span>💥 تفكيك الأعضاء للتوضيح التام (Explode)</span>
+              <span id="val-explode" class="slider-val">0%</span>
+            </div>
+            <input type="range" id="slider-explode" min="0" max="100" value="0" />
+          </div>
+
+          <div class="slider-row">
+            <div class="slider-label-line">
+              <span>👤 شفافية الغلاف الخارجي للجسم</span>
+              <span id="val-shell-opacity" class="slider-val">16%</span>
+            </div>
+            <input type="range" id="slider-shell-opacity" min="0" max="65" value="16" />
+          </div>
+
+          <div class="slider-row">
+            <div class="slider-label-line">
+              <span>🦴 شفافية القفص الصدري والجمجمة</span>
+              <span id="val-bone-opacity" class="slider-val">26%</span>
+            </div>
+            <input type="range" id="slider-bone-opacity" min="0" max="100" value="26" />
+          </div>
+
+          <div class="slider-row">
+            <div class="slider-label-line">
+              <label style="display:flex;align-items:center;gap:6px;cursor:pointer;">
+                <input type="checkbox" id="toggle-clip-plane" />
+                <span>🔪 تفعيل المقطع العرضي التشريحي</span>
+              </label>
+            </div>
+            <input type="range" id="slider-clip-height" min="0.2" max="7.8" step="0.05" value="7.8" disabled />
+          </div>
+        </div>
+      </aside>
+
+      <!-- المسرح الأوسط: جسم الإنسان ثلاثي الأبعاد + التسميات العربية التفاعلية -->
+      <section class="viewport-stage">
+        <!-- أزرار التحكم العلوية العائمة (وضع الرؤية + وضع التسميات العربية) -->
+        <div class="viewport-top-hud">
+          <div class="hud-pill-group">
+            <span class="hud-group-label">نمط الرؤية:</span>
+            <button type="button" class="hud-mode-btn active" data-visual-mode="normal">الوضع التشريحي الواضح</button>
+            <button type="button" class="hud-mode-btn" data-visual-mode="pure">الأعضاء الداخلية الصافية</button>
+            <button type="button" class="hud-mode-btn" data-visual-mode="xray">الأشعة السينية X-Ray</button>
+          </div>
+
+          <div class="hud-pill-group">
+            <span class="hud-group-label">التسميات العربية:</span>
+            <button type="button" class="hud-mode-btn active" data-label-mode="all">كل الأعضاء مع المؤشرات</button>
+            <button type="button" class="hud-mode-btn" data-label-mode="direct">مباشر فوق العضو</button>
+            <button type="button" class="hud-mode-btn" data-label-mode="hover">عند التحديد فقط</button>
+            <button type="button" class="hud-mode-btn" data-label-mode="none">إخفاء</button>
+          </div>
+        </div>
+
+        <!-- لافتة الاختبار التشريحي التفاعلي -->
+        <div id="quiz-overlay-banner" class="quiz-overlay-banner"></div>
+
+        <!-- حاوية WebGL الثلاثية الأبعاد -->
+        <div id="viewport-container"></div>
+
+        <!-- طبقة خطوط الإشارة الشعاعية SVG -->
+        <svg id="labels-svg-lines" xmlns="http://www.w3.org/2000/svg"></svg>
+
+        <!-- طبقة بطاقات أسماء الأعضاء باللغة العربية -->
+        <div id="labels-3d-layer"></div>
+
+        <!-- علامة المطور FATYAK المائية في زاوية الفضاء ثلاثي الأبعاد -->
+        <div class="fatyak-viewport-watermark">
+          <span>⚡ محرك ثلاثي الأبعاد مجاني 100% بدون API</span>
+          <span>•</span>
+          <strong>المطور: FATYAK</strong>
+        </div>
+
+        <!-- شريط زوايا الكاميرا والأدوات أسفل المشهد -->
+        <div class="viewport-bottom-hud">
+          <div id="viewport-hover-pill" class="viewport-hover-pill"></div>
+
+          <div class="camera-dock">
+            <button type="button" class="cam-btn" data-cam-preset="front">أمامي كامل</button>
+            <button type="button" class="cam-btn" data-cam-preset="back">خلفي (الظهر والكليتين)</button>
+            <button type="button" class="cam-btn" data-cam-preset="right">جانبي أيمن</button>
+            <button type="button" class="cam-btn" data-cam-preset="left">جانبي أيسر</button>
+            <button type="button" class="cam-btn" data-cam-preset="head_thorax">الدماغ والصدر</button>
+            <button type="button" class="cam-btn" data-cam-preset="abdomen">البطن والحوض</button>
+
+            <span class="dock-divider"></span>
+
+            <button type="button" id="btn-toggle-autorotate" class="cam-btn">🔄 دوران تلقائي</button>
+            <button type="button" id="btn-toggle-dim" class="cam-btn">🔦 شفافية الأعضاء المحيطة</button>
+            <button type="button" id="btn-toggle-particles" class="cam-btn active">🩸 نبض الدم والأعصاب</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- اللوحة اليسرى: البطاقة الطبية المفصلة للعضو + تخطيط القلب الحي -->
+      <aside class="side-panel">
+        <div class="panel-section-header">
+          <div class="panel-section-title">
+            <span>📋</span> الموسوعة التشريحية للعضو
+          </div>
+          <span class="count-badge">FATYAK MED</span>
+        </div>
+
+        <div id="organ-inspector-content" class="inspector-scroll-area"></div>
+
+        <!-- مراقب النبض وتخطيط القلب الكهربائي الحي -->
+        <div class="vitals-monitor-box">
+          <div class="vitals-top-row">
+            <div class="vitals-title">
+              <span class="pulse-dot"></span>
+              <span>تخطيط القلب الحي (ECG) ومعدل النبض</span>
+            </div>
+            <span id="val-heart-bpm" class="slider-val">72 نبضة/د</span>
+          </div>
+          <canvas id="ecg-live-canvas" width="310" height="46"></canvas>
+          <input type="range" id="slider-heart-bpm" min="40" max="160" value="72" />
+        </div>
+      </aside>
+    </main>
+  </div>
+
+  <!-- نافذة الهوية الاحترافية للمطور FATYAK -->
+  <div id="fatyak-developer-modal" class="modal-backdrop">
+    <div class="fatyak-modal-card">
+      <div class="modal-logo-showcase">
+        <!-- الشعار الكامل للمطور FATYAK -->
+        /*__INLINE_LOGO_SVG__*/
+      </div>
+      <h2 class="modal-title">أطلس جسم الإنسان ثلاثي الأبعاد</h2>
+      <p class="modal-desc">
+        منصة طبية وتشريحية تفاعلية متكاملة بُنيت بتقنيات WebGL / Three.js المتقدمة لعرض كافة أعضاء جسم الإنسان الداخلية بوضوح تام وباللغة العربية الكاملة، وتعمل مجاناً 100% وبدون الحاجة لأي مفتاح API أو اتصال خارجي.
+      </p>
+      <div class="modal-features-grid">
+        <div class="modal-feat-item">✅ المطور الرسمي: FATYAK</div>
+        <div class="modal-feat-item">✅ 22 عضو وهيكل تشريحي مفصل</div>
+        <div class="modal-feat-item">✅ تسمية عربية ذكية مع مؤشرات 3D</div>
+        <div class="modal-feat-item">✅ يعمل مجاناً 100% وبدون أي API</div>
+        <div class="modal-feat-item">✅ تفكيك الأعضاء ومقطع عرضي</div>
+        <div class="modal-feat-item">✅ نبض القلب وتنفس الرئتين واقعياً</div>
+      </div>
+      <button type="button" id="btn-close-fatyak-modal" class="util-btn" style="padding:10px 28px;font-size:0.9rem;">
+        إغلاق والعودة للأطلس ثلاثي الأبعاد
+      </button>
+    </div>
+  </div>
+
+  <script>/*__INLINE_JS__*/</script>
+</body>
+</html>
